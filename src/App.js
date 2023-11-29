@@ -146,6 +146,7 @@ function Bottom({ params }) {
   const containerRef = React.useRef(null);
 
   const FALSE = false;
+  console.log(steady);
 
   // 5 second timer
   useEffect(() => {
