@@ -1,7 +1,7 @@
 # react-now-next-iplayer
 React Now/Next
 This is a demo website of a simple React based 16:9 TV overlay using HTML5 graphics.
-text 2
+text 3
 Page Layout
 The page is laid out into three vertical segments, top middle and bottom.
 
