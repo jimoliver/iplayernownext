@@ -4,9 +4,8 @@ import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
 import { Temporal } from 'temporal-polyfill'
-import Paper from '@mui/material/Paper';
 
-import Image from './livein19202.png';
+
 //import { SequenceAnimator } from 'react-sequence-animator';
 
 
