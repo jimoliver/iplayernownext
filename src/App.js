@@ -222,14 +222,10 @@ function TopRight({ show }) {
   }
   return '';
 }
-
 export default function App(params) {
-  let demo = 'true';
+
   return (
-    <Paper sx={
-      demo === 'false' ?
-        { backgroundImage: `url(${Image})`, backgroundRepeat: 'round' }
-        : ''}>
+
       <Box sx={{
         width: 'auto', height: '100vh',
         display: 'grid', gridTemplateRows: '2fr 11fr max-content 1fr'
@@ -245,7 +241,7 @@ export default function App(params) {
         <Box>
       </Box>
       </Box>
-    </Paper>
+
 
   );
 }
