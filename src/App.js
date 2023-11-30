@@ -91,12 +91,12 @@ function NowNext({ now, next, previewMinutes, styling }) {
   }
   return (
     <Box sx={{
-      width: 'auto', height: '230px',
+      width: 'auto', height: '153px',
       display: 'grid', gridTemplateRows: '1fr 1fr 1fr', paddingLeft: '5%', paddingbottom: '5%'
     }}>
       <Box >
         <Typography
-          fontSize={'2.3333rem'}>
+          fontSize={'1.5rem'}>
           <span
             style={{
               color: iplayerPink
@@ -107,13 +107,13 @@ function NowNext({ now, next, previewMinutes, styling }) {
       </Box>
       <Box>
         <Fade in={true} timeout={500}>
-          <Typography fontSize={'4rem'}><b>{brand}</b></Typography>
+          <Typography fontSize={'2.6667rem'}><b>{brand}</b></Typography>
         </Fade>
       </Box>
       {styling === 'grownup' ?
         <Box>
           <Fade in={true} timeout={500}>
-            <Typography fontSize={'3.1667rem'}>{seriesEpisode}</Typography>
+            <Typography fontSize={'2rem'}>{seriesEpisode}</Typography>
           </Fade>
         </Box>
         :
@@ -181,12 +181,12 @@ function Bottom({ params }) {
         addEndListener={() => setSteady(FALSE)}>
         <Box sx={styling === 'grownup' ?
           {
-            height: '230px', width: 'auto', color: 'white',
+            height: '153px', width: 'auto', color: 'white',
             background: 'linear-gradient(to right, rgba(15, 15, 15, .8), rgba(245, 73, 151, .8))',
             display: 'grid', gridTemplateColumns: '1fr', marginbottom: '100px'
           }
           : {
-            height: '230px', width: 'auto', color: 'black',
+            height: '153px', width: 'auto', color: 'black',
             background: 'linear-gradient(to right, rgba(255, 255, 255, .9), rgba(255, 255, 255, .9))',
             display: 'grid', gridTemplateColumns: '1fr', marginbottom: '100px'
           }}>
@@ -221,7 +221,7 @@ export default function App(params) {
         : { backgroundColor: 'transparent' }}>
       <Box sx={{
         width: 'auto', height: '100vh',
-        display: 'grid', gridTemplateRows: '2fr 11fr 230px 33px'
+        display: 'grid', gridTemplateRows: '0px 543px 153px 24px'
       }}>
         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
           <Box><TopLeft show={params.tl} /></Box>
