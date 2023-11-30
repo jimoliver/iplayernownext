@@ -220,7 +220,7 @@ export default function App(params) {
   const demo = false;
   return (
     <Paper sx={
-      demo === false ?
+      demo === true ?
         { backgroundImage: `url(${Image})`, backgroundRepeat: 'round' }
         : { backgroundColor: 'transparent' }}>
       <Box sx={{
