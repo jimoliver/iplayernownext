@@ -96,18 +96,21 @@ function NowNext({ now, next, previewMinutes, styling }) {
     }}>
       <Box >
         <Typography
-          fontSize={'1.5rem'}>
+          fontFamily={BBCReithSans_W_ExBd}
+            fontSize={'1.5rem'}>
           <span
             style={{
               color: iplayerPink
             }}>
-            <b>{eventTitle}</b>
+            {eventTitle}
           </span>
           &nbsp;&nbsp;{eventTime}</Typography>
       </Box>
       <Box>
         <Fade in={true} timeout={500}>
-          <Typography fontSize={'2.6667rem'}><b>{brand}</b></Typography>
+          <Typography 
+                  fontFamily={BBCReithSans_W_Bd}
+          fontSize={'2.6667rem'}>{brand}</Typography>
         </Fade>
       </Box>
       {styling === 'grownup' ?

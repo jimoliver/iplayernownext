@@ -1,6 +1,6 @@
 html {
   font-size: 12px;
-  font-family: 'BBCReithSans_W_Rg', sans-serif;
+  font-family: 'BBCReithSans_W_Md', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -16,11 +16,16 @@ img {
 }
 
 @font-face {
-  font-family: 'BBCReithSans_W_Rg';
-  src: local('BBCReithSans_W_Rg'), url(./fonts/BBCReithSans_W_Rg.woff2) format('woff2');
+  font-family: 'BBCReithSans_W_Md';
+  src: local('BBCReithSans_W_Md'), url(./fonts/BBCReithSans_W_Md.woff2) format('woff2');
 }
 
 @font-face {
   font-family: 'BBCReithSans_W_Bd';
   src: local('BBCReithSans_W_Bd'), url(./fonts/BBCReithSans_W_Bd.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'BBCReithSans_W_ExBd';
+  src: local('BBCReithSans_W_ExBd'), url(./fonts/BBCReithSans_W_ExBd.woff2) format('woff2');
 }
