@@ -94,13 +94,18 @@ function NowNext({ now, next, previewMinutes, styling }) {
       width: 'auto', height: '153px',
       display: 'grid', gridTemplateRows: '1fr 1fr 1fr', paddingLeft: '5%', paddingbottom: '5%'
     }}>
-      <Box >
+      <Box
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignContent: 'flex-end',
+        }}
+      >
         <Typography
- 
-            fontSize={'1.5rem'}>
+          fontSize={'1.7rem'}>
           <span
             style={{
-              fontFamily:'BBCReithSans_W_ExBd',
+              fontFamily: 'BBCReithSans_W_ExBd',
               color: iplayerPink
             }}>
             {eventTitle}
@@ -109,15 +114,23 @@ function NowNext({ now, next, previewMinutes, styling }) {
       </Box>
       <Box>
         <Fade in={true} timeout={500}>
-          <Typography 
-                  fontFamily={'BBCReithSans_W_Bd'}
-          fontSize={'2.6667rem'}>{brand}</Typography>
+          <Typography
+            fontFamily={'BBCReithSans_W_Bd'}
+            fontSize={'2.6667rem'}>{brand}</Typography>
         </Fade>
       </Box>
       {styling === 'grownup' ?
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignContent: 'flex-start',
+          }}
+        >
           <Fade in={true} timeout={500}>
-            <Typography fontSize={'2rem'}>{seriesEpisode}</Typography>
+            <Typography
+              fontFamily={'BBCReithSans_W_Md'}
+              fontSize={'2.2rem'}>{seriesEpisode}</Typography>
           </Fade>
         </Box>
         :

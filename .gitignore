@@ -8,9 +8,6 @@
 # testing
 /coverage
 
-#fonts
-/src/fonts/*.zip
-
 # production
 /build
 
