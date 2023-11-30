@@ -2,14 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Slide from '@mui/material/Slide';
 import Fade from '@mui/material/Fade';
+import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography';
 import { Temporal } from 'temporal-polyfill'
-
-
-//import { SequenceAnimator } from 'react-sequence-animator';
-
-
-
+import Image from './livein19202.png';
 const iplayerPink = '#f54996';
 
 const urls = {
@@ -25,16 +21,18 @@ function gettitles(item) {
   const b = titlefor(item, 'brand');
   const s = titlefor(item, 'series');
   const e = item.title_hierarchy?.titles?.find((t) => !t.inherited_from)?.title?.$;
-  const t = b ? `${b} ` : '';
+  const t = b ? `${b}` : '';
   if (s) {
     return {
       episodeTitle: `${e}`,
-      brandSeriesTitle: `${s}: ${t}`,
+      brandTitle: `${t}`,
+      seriesTitle: `${s}`,
     };
   }
   return {
     episodeTitle: `${e}`,
-    brandSeriesTitle: `${t}`,
+    brandTitle: `${t}`,
+    seriesTitle: '',
   };
 }
 
@@ -51,13 +49,13 @@ function chooseNext(next, minDuration) {
   return { title: '' };
 }
 
-function NowNext({ now, next, previewMinutes, steady, styling }) {
+function NowNext({ now, next, previewMinutes, styling }) {
 
   let r;
-  let text;
-  let brandseriestext;
-  let eventtitle;
-  let eventtime;
+  let brand;
+  let seriesEpisode;
+  let eventTitle;
+  let eventTime;
 
   if (next) {
     const start = Date.parse(next.start);
@@ -68,63 +66,59 @@ function NowNext({ now, next, previewMinutes, steady, styling }) {
     }
     if (minutesToNext < previewMinutes) {
       const to = gettitles(next)
-      r = `next up: ${to.episodeTitle}`;
-      brandseriestext = to.brandSeriesTitle;
-      eventtitle = 'ON NEXT';
-      eventtime = `| Starting in ${minutesToNext} mins`;
+      r = `${to.brandTitle}`;
+      seriesEpisode = to.seriesTitle ? `${to.seriesTitle}: ${to.episodeTitle}` : to.episodeTitle;
+      eventTitle = 'ON NEXT';
+      eventTime = `|  Starting in ${minutesToNext} mins`;
     }
   }
   if (r) {
-    text = r;
+    brand = r;
   } else {
     if (now) {
       const end = Temporal.Instant.from(now.start).add(Temporal.Duration.from(now.duration));
       console.log(`start ${now.start} end ${end}`);
       const durationleft = Math.round(Temporal.Duration.from(Temporal.Now.instant().until(end)).seconds / 60);
       console.log(`Minutes left of Now playing? ${durationleft}`);
-      // const durationleft = Math.round((end - (new Date())) / 1000 / 60);
       const to = gettitles(now)
-      text = ` ${to.episodeTitle}`;
-      brandseriestext = to.brandSeriesTitle;
-      eventtitle = 'ON NOW';
-      eventtime = `| ${durationleft} mins left `;
+      brand = ` ${to.brandTitle}`;
+      seriesEpisode = to.seriesTitle ? `${to.seriesTitle}: ${to.episodeTitle}` : to.episodeTitle;
+      eventTitle = 'ON NOW';
+      eventTime = `|  ${durationleft} mins left `;
     } else {
-      text = '';
+      brand = '';
     }
   }
   return (
     <Box sx={{
-      width: 'auto', height: '160px',
-      display: 'grid', gridTemplateRows: '1fr 6fr 1fr', paddingLeft: '5%', paddingbottom: '5%'
+      width: 'auto', height: '230px',
+      display: 'grid', gridTemplateRows: '1fr 1fr 1fr', paddingLeft: '5%', paddingbottom: '5%'
     }}>
       <Box >
         <Typography
-
-          fontSize={'2rem'} ce>
+          fontSize={'2.3333rem'}>
           <span
             style={{
               color: iplayerPink
             }}>
-            <b>{eventtitle}</b>
+            <b>{eventTitle}</b>
           </span>
-          &nbsp;&nbsp;&nbsp;{eventtime}</Typography>
-
+          &nbsp;&nbsp;{eventTime}</Typography>
       </Box>
       <Box>
         <Fade in={true} timeout={500}>
-          <Typography fontSize={'4.5rem'} ce><b>{text}</b></Typography>
+          <Typography fontSize={'4rem'}><b>{brand}</b></Typography>
         </Fade>
       </Box>
-{styling === 'adult'? 
-      <Box>
-        <Fade in={true} timeout={500}>
-          <Typography fontSize={'2.5rem'} ce>{brandseriestext}</Typography>
-        </Fade>
-      </Box>
-:
-''
-}
-
+      {styling === 'grownup' ?
+        <Box>
+          <Fade in={true} timeout={500}>
+            <Typography fontSize={'3.1667rem'}>{seriesEpisode}</Typography>
+          </Fade>
+        </Box>
+        :
+        ''
+      }
     </Box>
   );
 }
@@ -136,7 +130,7 @@ function Bottom({ params }) {
   const env = params.env || 'live';
   const sid = params.sid || 'History_Channel';
   const region = params.region || 'eu-west-2';
-  const styling = params.styling || 'childrens';
+  const styling = params.styling || 'grownup';
 
   const [on, setOn] = useState(false);
   const [now, setNow] = useState();
@@ -177,7 +171,7 @@ function Bottom({ params }) {
           }
           </Box
   */
-console.log(`styling log ${styling}`);
+  console.log(`styling log ${styling}`);
   return (
     <Box sx={{ overflow: 'hidden' }} ref={containerRef}>
       <Slide direction="up"
@@ -185,22 +179,19 @@ console.log(`styling log ${styling}`);
         container={containerRef.current}
         onEntered={() => console.log('entered')}
         addEndListener={() => setSteady(FALSE)}>
-        <Box sx={styling === 'adult' ?
+        <Box sx={styling === 'grownup' ?
           {
-
-            height: 180, width: 'auto', color: 'white',
-            background: 'linear-gradient(to right, rgba(15, 15, 15, .7), rgba(245, 73, 151, .7))',
+            height: '230px', width: 'auto', color: 'white',
+            background: 'linear-gradient(to right, rgba(15, 15, 15, .8), rgba(245, 73, 151, .8))',
             display: 'grid', gridTemplateColumns: '1fr', marginbottom: '100px'
           }
           : {
-
-            height: 180, width: 'auto', color: 'black',
-            background: 'linear-gradient(to right, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7))',
+            height: '230px', width: 'auto', color: 'black',
+            background: 'linear-gradient(to right, rgba(255, 255, 255, .9), rgba(255, 255, 255, .9))',
             display: 'grid', gridTemplateColumns: '1fr', marginbottom: '100px'
           }}>
-
           <Box display='flex' alignItems='center'>
-            <NowNext now={now} next={next} previewMinutes={previewMinutes} styling={styling}/>
+            <NowNext now={now} next={next} previewMinutes={previewMinutes} styling={styling} />
           </Box>
         </Box>
       </Slide>
@@ -222,14 +213,16 @@ function TopRight({ show }) {
   return '';
 }
 export default function App(params) {
-
+  const demo = false;
   return (
-
+    <Paper sx={
+      demo === true ?
+        { backgroundImage: `url(${Image})`, backgroundRepeat: 'round' }
+        : { backgroundColor: 'transparent' }}>
       <Box sx={{
         width: 'auto', height: '100vh',
-        display: 'grid', gridTemplateRows: '2fr 11fr max-content 1fr'
+        display: 'grid', gridTemplateRows: '2fr 11fr 230px 33px'
       }}>
-
         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr' }}>
           <Box><TopLeft show={params.tl} /></Box>
           <Box></Box>
@@ -238,9 +231,8 @@ export default function App(params) {
         <Box></Box>
         <Bottom params={params} />
         <Box>
+        </Box>
       </Box>
-      </Box>
-
-
+    </Paper>
   );
 }
