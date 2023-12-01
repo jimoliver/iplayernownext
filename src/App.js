@@ -192,6 +192,7 @@ function Bottom({ params }) {
   return (
     <Box sx={{ overflow: 'hidden' }} ref={containerRef}>
       <Slide direction="up"
+      timeout={2000}
         in={on} mountOnEnter unmountOnExit
         container={containerRef.current}
         onEntered={() => console.log('entered')}
@@ -233,7 +234,7 @@ export default function App(params) {
   const demo = false;
   return (
     <Paper sx={
-      demo === true ?
+      demo === false ?
         { backgroundImage: `url(${Image})`, backgroundRepeat: 'round' }
         : { backgroundColor: 'transparent' }}>
       <Box sx={{
