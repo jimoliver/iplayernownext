@@ -192,7 +192,7 @@ function Bottom({ params }) {
   return (
     <Box sx={{ overflow: 'hidden' }} ref={containerRef}>
       <Slide direction="up"
-      timeout={2000}
+      timeout={500}
         in={on} mountOnEnter unmountOnExit
         container={containerRef.current}
         onEntered={() => console.log('entered')}
@@ -231,7 +231,7 @@ function TopRight({ show }) {
   return '';
 }
 export default function App(params) {
-  const demo = false;
+  const demo = true;
   return (
     <Paper sx={
       demo === false ?
