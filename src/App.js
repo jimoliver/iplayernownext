@@ -60,7 +60,7 @@ function NowNext({ now, next, previewMinutes, styling }) {
   if (next) {
     const start = Date.parse(next.start);
     const minutesToNext = Math.round((start - (new Date())) / 1000 / 60);
-    console.log('minutes to next start', minutesToNext);
+    console.log('minutes to next start', minutesToNext, ' previewMinutes', previewMinutes);
     if (minutesToNext <= 0) {
       r = '';
     }
@@ -72,6 +72,7 @@ function NowNext({ now, next, previewMinutes, styling }) {
       eventTime = `|  Starting in ${minutesToNext} mins`;
     }
   }
+  console.log(`Are we going to show 'ON NEXT'? ${eventTitle} ${r}`);
   if (r) {
     brand = r;
   } else {
@@ -143,7 +144,8 @@ function NowNext({ now, next, previewMinutes, styling }) {
 function Bottom({ params }) {
 
   const minDuration = Temporal.Duration.from(params.minDuration || 'PT2M');
-  const previewMinutes = parseInt(params.next || '2', 2);
+  const previewMinutes = params.next ? parseInt(params.next) : 2;
+  
   const env = params.env || 'live';
   const sid = params.sid || 'History_Channel';
   const region = params.region || 'eu-west-2';
@@ -154,8 +156,9 @@ function Bottom({ params }) {
   const [next, setNext] = useState();
   const [steady, setSteady] = useState(false);
   const containerRef = React.useRef(null);
+  let eventTime;
 
-  const FALSE = false;
+  const FALSE = true;
   console.log(steady);
 
   // 5 second timer
@@ -163,12 +166,14 @@ function Bottom({ params }) {
     let interval = null;
     interval = setInterval(() => {
       (async () => {
-        const sOfm = (new Date()).getSeconds();
-        if ((sOfm / 2) < 12) {
+        const sOfm = (eventTime) ;
+        if ((sOfm) > 1) {
           setOn(true);
         } else {
           setOn(FALSE);
         }
+        console.log(sOfm);
+
         const r = await fetch(`${urls[env]}/${sid}/${region}`);
         if (r.ok) {
           const data = await r.json()
@@ -192,11 +197,11 @@ function Bottom({ params }) {
   return (
     <Box sx={{ overflow: 'hidden' }} ref={containerRef}>
       <Slide direction="up"
-      timeout={500}
         in={on} mountOnEnter unmountOnExit
         container={containerRef.current}
         onEntered={() => console.log('entered')}
-        addEndListener={() => setSteady(FALSE)}>
+        addEndListener={() => setSteady(FALSE)}
+        timeout={500}>
         <Box sx={styling === 'grownup' ?
           {
             height: '153px', width: 'auto', color: 'white',
@@ -231,10 +236,10 @@ function TopRight({ show }) {
   return '';
 }
 export default function App(params) {
-  const demo = true;
+  const demo = false;
   return (
     <Paper sx={
-      demo === false ?
+      demo === true ?
         { backgroundImage: `url(${Image})`, backgroundRepeat: 'round' }
         : { backgroundColor: 'transparent' }}>
       <Box sx={{

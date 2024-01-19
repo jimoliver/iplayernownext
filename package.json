@@ -10,6 +10,7 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "react-sequence-animator": "^2.3.0",
+    "schedule": "^0.5.0",
     "temporal-polyfill": "^0.1.1",
     "web-vitals": "^2.1.4"
   },
