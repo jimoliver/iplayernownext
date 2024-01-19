@@ -236,7 +236,7 @@ function TopRight({ show }) {
   return '';
 }
 export default function App(params) {
-  const demo = false;
+  const demo = true;
   return (
     <Paper sx={
       demo === true ?
