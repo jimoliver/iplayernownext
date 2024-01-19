@@ -204,8 +204,8 @@ function Bottom({ params }) {
         timeout={500}>
         <Box sx={styling === 'grownup' ?
           {
-            height: '153px', width: 'auto', color: 'white',
-            background: 'linear-gradient(to right, rgba(15, 15, 15, .8), rgba(245, 73, 151, .8))',
+            height: '153px', width: 'auto', color: 'black',
+            background: 'linear-gradient(to right, rgba(15, 15, 15, .01), rgba(245, 73, 151, .01))',
             display: 'grid', gridTemplateColumns: '1fr', marginbottom: '100px'
           }
           : {
